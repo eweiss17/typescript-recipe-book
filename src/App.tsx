@@ -1,26 +1,60 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import {Button, Container, Divider, Header, Icon, Message, Tab, Form} from 'semantic-ui-react';
+import RecipeBox from './RecipeBox';
+import DisplayRecipes from './DisplayRecipes';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface State {
+  recipes: Array<Array<string>>;
+  title: string;
+  recipeCount: number;
 }
 
-export default App;
+interface Props {
+
+}
+
+export default class App extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      recipes: [],
+      title: '',
+      recipeCount: 0,
+    };
+  }
+  
+  incrementRecipe = () => {
+    this.setState({recipeCount: this.state.recipeCount + 1})
+  }
+  
+  addRecipe = (recipe: Array<string>) => {
+
+    let arr = this.state.recipes;
+    arr.push(recipe);
+    this.setState({recipes: arr})
+    this.incrementRecipe();
+    
+  }
+  
+  render() {
+    return (
+      <div>
+        <Container className='header-container' textAlign='center'>
+          <Header as='h1'>React Recipebook</Header>
+          <Header as='h3'>Now with TypeScript!</Header>
+           {/* {(this.state.recipeCount) ? <div>You have {this.state.recipeCount - 1} recipes!</div> : null} */}
+        </Container>
+        <Divider />
+        <Container className='recipe-container'>
+        {(this.state.recipes && this.state.recipes.length) ? 
+            <DisplayRecipes recipes={this.state.recipes} />
+            : null }
+        {(this.state.recipeCount) ? 
+            <RecipeBox addRecipe={(recipe: Array<string>) => {this.addRecipe(recipe)}} />
+            : <Button className ='new-button' onClick={this.incrementRecipe} primary>Start!</Button>}
+        </Container>
+      </div>
+    );
+  }
+}

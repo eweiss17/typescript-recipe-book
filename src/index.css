@@ -11,3 +11,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#app {
+  text-align: center;
+}
+
+#tabs {
+  display: block;
+  list-style-type: none;
+}
+
+#tabs li {
+  display: inline;
+  margin-left: 2%;
+  padding: 1.3%;
+  background-color: silver;
+  border-radius: 0.75em 0.75em 0 0;
+}
+
+#tabs li a {
+  color: blue;
+}
+
+.header-container {
+  margin-top: 3%;
+}
+
+.recipe-container {
+  background-color: rgba(128, 128, 128, 0.3);
+  margin-left: 2%; 
+  margin-right: 2%;
+  border-radius: 0.8em;
+  height: 600px;
+}
+
+.new-button {
+  margin: 2% 0% 0% 45% !important;
+}
